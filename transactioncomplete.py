@@ -1,8 +1,10 @@
 import json
+import os
 import asyncio
 import traceback
 import requests
 from base64 import b64decode
+from dotenv import load_dotenv
 
 # Import from solders
 from solders.keypair import Keypair
@@ -22,9 +24,11 @@ from spl.token.instructions import (
 # Define SYS_PROGRAM_ID manually
 SYS_PROGRAM_ID = Pubkey.from_string("11111111111111111111111111111111")
 
+load_dotenv()
+
 async def main():
     # Constants
-    NETWORK = "https://quaint-sly-glitter.solana-devnet.quiknode.pro/972553856f5c4d5a1d58659d565fac3023003c4f/"
+    NETWORK = os.getenv("QUICKNODE_NETWORK")
     async_client = AsyncClient(NETWORK)
     print(f"Using RPC endpoint: {NETWORK}")
 
